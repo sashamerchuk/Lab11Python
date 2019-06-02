@@ -17,4 +17,4 @@ class CreativityManager:
     def print_creativity_good(self, creativity):
         for i in creativity:
             print(i)
-            print('\n')
+           
