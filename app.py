@@ -4,14 +4,12 @@ from flask_marshmallow import Marshmallow
 from Main import main
 
 app = Flask(__name__)
-
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://lab13:lab13@localhost/lab13'
-
 db=SQLAlchemy(app)
 ma = Marshmallow(app)
 
 class CreativityGood(db.Model):
-    __tablename__ = 'good'
+    __tablename__ = 'creativityGood'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(length=80))
@@ -32,7 +30,7 @@ creativity_good_schema = CreativityGoodSchema()
 creativity_good_schema = CreativityGoodSchema(many=True)
 db.create_all()
 
-@app.route("/creativityGood",methods=["POST"])
+@app.route("/creativityGood/",methods=["POST"])
 def add_creativity_good():
     name = request.get_json()["name"]
     price = request.get_json()["price"]
@@ -44,7 +42,7 @@ def add_creativity_good():
 
     return jsonify(request.json)
 
-@app.route("/creativityGood",methods=["GET"])
+@app.route("/creativityGood/",methods=["GET"])
 def all_creativity_good():
     all_creativity_good = CreativityGood.query.all()
     result= creativity_good_schema.dump(all_creativity_good)
@@ -67,7 +65,7 @@ def replace_creativity_good(id):
     db.session.commit()
     return creativity_good_schema.jsonify(request.json)
 
-@app.route("/good<id>",methods=["DELETE"])
+@app.route("/creativityGood/<id>",methods=["DELETE"])
 def creativity_good_delete(id):
     creativity_good = CreativityGood.query.get(id)
 
