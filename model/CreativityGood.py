@@ -1,7 +1,8 @@
 from model.Type import Type
+from abc import ABC
 
 
-class CreativityGood():
+class CreativityGood(ABC):
 
     def __init__(self, name="", price=0, type=Type.WEAVING):
         self.name = name
